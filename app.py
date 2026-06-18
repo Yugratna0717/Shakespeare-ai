@@ -1,21 +1,53 @@
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
+from pathlib import Path
 import os
 
-# Load API key
-load_dotenv()
+# Load .env file explicitly
+env_path = Path(__file__).parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
 
-model = genai.GenerativeModel("gemini-2.5-flash")
+# Streamlit page settings
+st.set_page_config(
+    page_title="Shakespeare AI",
+    page_icon="🎭",
+    layout="centered"
+)
 
 st.title("🎭 Shakespeare AI")
 
-play = st.text_input("Enter Play Name", "Julius Caesar")
-act = st.number_input("Act", min_value=1, value=1)
-scene = st.number_input("Scene", min_value=1, value=1)
+# Check API key
+if not api_key:
+    st.error("❌ GEMINI_API_KEY not found.")
+    st.stop()
 
+# Gemini client
+client = genai.Client(api_key=api_key)
+
+# User inputs
+play = st.text_input(
+    "Enter Play Name",
+    "Julius Caesar"
+)
+
+act = st.number_input(
+    "Act",
+    min_value=1,
+    value=1,
+    step=1
+)
+
+scene = st.number_input(
+    "Scene",
+    min_value=1,
+    value=1,
+    step=1
+)
+
+# Button
 if st.button("Explain Scene"):
 
     prompt = f"""
@@ -24,15 +56,18 @@ You are an expert Shakespeare teacher.
 Explain {play} Act {act} Scene {scene} line by line.
 
 Rules:
-1. First write the original dialogue exactly as it appears in Shakespeare's text.
+
+1. Write the original Shakespeare dialogue.
 2. Immediately below it write:
 
 Meaning:
 
 3. Explain in simple modern English.
-4. Explain difficult words, metaphors and references.
-5. Do not skip any dialogue.
-6. Preserve speaker names.
+4. Explain difficult words and metaphors.
+5. Preserve speaker names.
+6. Do not skip dialogues.
+7. If you don't know the exact scene, say:
+"I don't have access to the exact text of this scene."
 
 Example:
 
@@ -42,9 +77,20 @@ I do fear the people choose Caesar for their king.
 Meaning:
 Brutus is worried that the Roman people may make Caesar their king.
 
-Now explain the entire scene.
+Now explain the complete scene.
 """
 
-    response = model.generate_content(prompt)
+    try:
+        with st.spinner("Gemini is thinking..."):
 
-    st.markdown(response.text)
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt
+            )
+
+        st.success("Explanation generated successfully!")
+
+        st.markdown(response.text)
+
+    except Exception as e:
+        st.error(f"Error: {e}")
