@@ -1,134 +1,124 @@
 # 🎭 Shakespeare AI
-
-An AI-powered Shakespeare tutor built with **Streamlit** and **Google Gemini** that explains Shakespearean plays in simple modern English.
-
-Users can enter a play name, act number, and scene number, and the AI generates line-by-line explanations in easy-to-understand language.
-
+ 
+> An AI-powered web application that explains Shakespeare plays scene by scene in simple, modern English — powered by Google Gemini 2.5 Flash and Streamlit.
+ 
 ---
-
+ 
+## 📸 Preview
+ 
+![Shakespeare AI](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=google&logoColor=white)
+ 
+---
+ 
 ## ✨ Features
-
-- 📖 Explain Shakespeare scenes line by line
-- 🗣️ Convert Elizabethan English into modern English
-- 🌐 Interactive web interface built with Streamlit
-- 🤖 Powered by Google's Gemini API
-- ⚡ Fast and lightweight deployment using Streamlit Community Cloud
-
+ 
+- 📖 Enter any Shakespeare play, act, and scene
+- 🧠 Get line-by-line explanations in simple modern English
+- 💬 Original dialogue preserved with speaker names
+- 🔍 Difficult words, metaphors, and references explained
+- ⚡ Powered by Google Gemini 2.5 Flash
 ---
-
+ 
 ## 🛠️ Tech Stack
-
-| Package | Purpose |
-|---------|---------|
-| `streamlit` | Builds the interactive web application |
-| `google-generativeai` | Connects the app to Google's Gemini models |
-| `python-dotenv` | Loads API keys from a `.env` file |
-| `os` | Accesses environment variables |
-
+ 
+| Technology | Purpose |
+|------------|---------|
+| Python | Core language |
+| Streamlit | Web interface |
+| Google Gemini 2.5 Flash | AI explanations |
+| python-dotenv | Environment variable management |
+ 
 ---
-
-## 📂 Project Structure
-
-```text
-Shakespeare-ai/
-
-├── app.py
-├── requirements.txt
-├── README.md
-├── .gitignore
-├── .env
-└── venv/
-```
-
----
-
-## 🚀 Installation
-
-### Clone the repository
-
+ 
+## 🚀 Getting Started
+ 
+### Prerequisites
+- Python 3.8+
+- A [Google Gemini API Key](https://aistudio.google.com/app/apikey)
+### Installation
+ 
+1. **Clone the repository**
 ```bash
-git clone https://github.com/Yugratna0717/Shakespeare-ai.git
-
-cd Shakespeare-ai
+   git clone https://github.com/Yugratna0717/shakespeare-ai.git
+   cd shakespeare-ai
 ```
-
-### Create a virtual environment
-
-#### macOS / Linux
-
+ 
+2. **Create and activate a virtual environment**
 ```bash
-python3 -m venv venv
-
-source venv/bin/activate
+   python -m venv venv
+   source venv/bin/activate        # Mac/Linux
+   venv\Scripts\activate           # Windows
 ```
-
-#### Windows
-
+ 
+3. **Install dependencies**
 ```bash
-python -m venv venv
-
-venv\Scripts\activate
+   pip install -r requirements.txt
 ```
-
-### Install dependencies
-
+ 
+4. **Set up your API key**
+   Create a `.env` file in the project root:
+```
+   GEMINI_API_KEY=your_actual_api_key_here
+```
+ 
+5. **Run the app**
 ```bash
-pip install -r requirements.txt
+   streamlit run app.py
 ```
-
+ 
+   The app will open at `http://localhost:8501`
+ 
 ---
-
-## 🔑 Environment Variables
-
-Create a `.env` file in the project directory.
-
-```env
-GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+ 
+## 📁 Project Structure
+ 
 ```
-
-Replace `YOUR_GEMINI_API_KEY` with your actual Gemini API key.
-
+shakespeare-ai/
+├── app.py              # Main Streamlit application
+├── test.py             # API connection test script
+├── requirements.txt    # Python dependencies
+├── .env                # API key (not pushed to GitHub)
+├── .gitignore          # Git ignore rules
+└── README.md           # Project documentation
+```
+ 
 ---
-
-## ▶️ Running the Application
-
-Run the Streamlit app:
-
+ 
+## 🔐 Environment Variables
+ 
+| Variable | Description |
+|----------|-------------|
+| `GEMINI_API_KEY` | Your Google Gemini API key from [Google AI Studio](https://aistudio.google.com/) |
+ 
+> ⚠️ Never push your `.env` file to GitHub. It is already included in `.gitignore`.
+ 
+---
+ 
+## 🧪 Testing
+ 
+To verify your API connection is working:
 ```bash
-streamlit run app.py
+python test.py
 ```
-
-The application will open in your browser at:
-
-```text
-http://localhost:8501
-```
-
+ 
 ---
-
-## 📦 Requirements
-
-```txt
-streamlit
-google-generativeai
-python-dotenv
-```
-
+ 
+## 🌐 Deployment
+ 
+This app can be deployed for free on [Streamlit Cloud](https://share.streamlit.io):
+ 
+1. Push your code to GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io) and connect your repo
+3. Set `app.py` as the main file
+4. Add your `GEMINI_API_KEY` under **Settings → Secrets**
+5. Click **Deploy**
 ---
-
-## 🎯 Future Improvements
-
-- 📚 Scene summaries
-- 👤 Character analysis
-- ⭐ Important quotes
-- 📝 Exam-style questions
-- 🎨 Improved UI/UX
-- 📖 Support for additional literary works
-
----
-
-## 👨‍💻 Author
-
+ 
+## 👩‍💻 Author
+ 
 **Yugratna**
-
-Built using **Python**, **Streamlit**, and **Google Gemini**.
+- GitHub: [@Yugratna0717](https://github.com/Yugratna0717)
+---
+ 
